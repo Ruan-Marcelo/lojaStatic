@@ -130,13 +130,20 @@
   <body
     class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed"
   >
-       <!-- TopNavBar -->
+    <!-- TopNavBar -->
     <header
       class="bg-[#F9F7F2] dark:bg-[#121212] docked full-width top-0 border-b border-[#1B3022]/10 dark:border-white/10 sticky z-50"
     >
       <div
         class="flex justify-between items-center w-full px-12 py-8 max-w-[1440px] mx-auto"
       >
+        <!-- BOTÃO MOBILE -->
+        <button
+          id="menuBtn"
+          class="md:hidden text-[#1B3022] dark:text-[#EAEAEA]"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
         <div
           class="text-2xl font-serif tracking-[0.4em] text-[#1B3022] dark:text-[#EAEAEA]"
         >
@@ -192,6 +199,31 @@
         </div>
       </div>
     </header>
+    <!-- MENU MOBILE -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 left-[-100%] w-72 h-full bg-[#F9F7F2]/90 dark:bg-[#121212]/90 backdrop-blur-xl z-50 transition-all duration-300 shadow-2xl p-8 flex flex-col gap-8"
+    >
+      <div class="flex justify-between items-center">
+        <span class="font-serif uppercase tracking-widest text-xs">Menu</span>
+        <button id="closeMenu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <a class="mobile-link" href="index.html">Bespoke</a>
+      <a class="mobile-link" href="produtos.html">Collections</a>
+      <a class="mobile-link" href="acessorios.html"
+        >Accessories</a
+      >
+      <a class="mobile-link text-[#C5A059]" href="sobre.html">Our Story</a>
+    </div>
+
+    <!-- OVERLAY -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-all duration-300 z-40"
+    ></div>
     <main class="pt-[100px]">
       <!-- Hero Section -->
       <section
@@ -206,8 +238,8 @@
           <p
             class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto"
           >
-           O patrimônio não se encontra no passado, mas na qualidade duradoura do presente.
-Explore a autoridade discreta de Lupiére.
+            O patrimônio não se encontra no passado, mas na qualidade duradoura
+            do presente. Explore a autoridade discreta de Lupiére.
           </p>
         </div>
         <div class="absolute inset-0 z-0 opacity-20">
@@ -234,17 +266,16 @@ Explore a autoridade discreta de Lupiére.
             class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
           >
             No terreno acidentado dos picos do norte, o lobo — O Lobo — ergue-se
-como um símbolo de liderança solitária e foco inabalável. Esse espírito
-foi o catalisador para a Lupiére. Fundada no princípio de que o verdadeiro
-estilo exige a coragem de se destacar, nosso ateliê cria
-peças que servem como armadura para o pioneiro moderno.
+            como um símbolo de liderança solitária e foco inabalável. Esse
+            espírito foi o catalisador para a Lupiére. Fundada no princípio de
+            que o verdadeiro estilo exige a coragem de se destacar, nosso ateliê
+            cria peças que servem como armadura para o pioneiro moderno.
           </p>
           <p
             class="font-body-md text-body-md text-on-surface-variant leading-relaxed italic"
           >
-              "A força do lobo está na matilha, mas a força da matilha
-está no líder que veste o manto da responsabilidade com silenciosa
-graça."
+            "A força do lobo está na matilha, mas a força da matilha está no
+            líder que veste o manto da responsabilidade com silenciosa graça."
           </p>
         </div>
         <div
@@ -345,7 +376,8 @@ graça."
         <blockquote
           class="font-headline-display text-headline-md md:text-headline-lg max-w-3xl italic text-primary"
         >
-          "O estilo é a silhueta do caráter de alguém, definida pelas escolhas feitas nas sombras do ateliê."
+          "O estilo é a silhueta do caráter de alguém, definida pelas escolhas
+          feitas nas sombras do ateliê."
         </blockquote>
         <p class="font-label-caps text-label-caps text-on-surface-variant mt-8">
           — MARCUS LUPI, FOUNDER
@@ -424,5 +456,7 @@ graça."
         </div>
       </div>
     </footer>
+
+    <script src="main.js"></script>
   </body>
 </html>

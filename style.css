@@ -1,0 +1,37 @@
+.nav-link {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #1B3022;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #B4CDB8;
+}
+
+.icon-btn {
+  transition: 0.3s;
+}
+
+.icon-btn:hover {
+  color: #C5A059;
+  transform: scale(1.1);
+}
+
+.mobile-link {
+  font-family: "Noto Serif";
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  color: #1B3022;
+  transition: 0.3s;
+}
+
+.dark .mobile-link {
+  color: #EAEAEA;
+}
+
+.mobile-link:hover {
+  color: #C5A059;
+}

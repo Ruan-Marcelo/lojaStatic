@@ -14,6 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:wght@400&amp;display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css">
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -131,65 +132,66 @@
   </head>
   <body class="bg-surface text-on-surface antialiased">
     <!-- TopNavBar -->
-    <header
-      class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-24 flex items-center ease-out transition-all duration-300"
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-20 flex items-center transition-all duration-300"
+>
+  <div
+    class="flex justify-between items-center w-full px-6 md:px-16 max-w-[1440px] mx-auto"
+  >
+    <!-- BOTÃO MENU MOBILE -->
+    <button id="menuBtn" class="lg:hidden text-[#1B3022]">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <!-- NAV DESKTOP -->
+    <nav class="hidden lg:flex gap-10">
+      <a class="nav-link" href="index.html">Bespoke</a>
+      <a class="nav-link" href="produtos.html">Collections</a>
+      <a class="nav-link" href="acessorios.html">Accessories</a>
+      <a class="nav-link" href="sobre.html">Our Story</a>
+    </nav>
+
+    <!-- LOGO -->
+    <div
+      class="text-xl md:text-2xl font-headline-lg tracking-[0.4em] text-[#1B3022]"
     >
-      <div
-        class="flex justify-between items-center w-full px-8 md:px-16 max-w-[1440px] mx-auto"
-      >
-        <nav class="hidden lg:flex gap-10">
-          <a
-            class="font-label-caps text-[11px] text-[#1B3022] uppercase tracking-[0.15em] hover:text-[#B4CDB8] transition-colors duration-500"
-            href="index.html"
-            >Bespoke</a
-          >
-          <a
-            class="font-label-caps text-[11px] text-[#1B3022] uppercase tracking-[0.15em] hover:text-[#B4CDB8] transition-colors duration-500"
-            href="produtos.html"
-            >Collections</a
-          >
-          <a
-            class="font-label-caps text-[11px] text-[#1B3022] uppercase tracking-[0.15em] hover:text-[#B4CDB8] transition-colors duration-500"
-            href="acessorios.html"
-            >Accessories</a
-          >
-          <a
-            class="font-label-caps text-[11px] text-[#1B3022] uppercase tracking-[0.15em] hover:text-[#B4CDB8] transition-colors duration-500"
-            href="sobre.html"
-            >Our Story</a
-          >
-        </nav>
-        <div
-          class="text-2xl font-headline-lg tracking-[0.4em] text-[#1B3022] select-none"
-        >
-          LUPIÈRE
-        </div>
-        <div class="flex items-center gap-8 text-[#1B3022]">
-          <a
-            href="carrinho.html"
-            aria-label="Abrir carrinho"
-            class="group cursor-pointer transition-all duration-300 hover:text-[#C5A059]"
-          >
-            <span
-              class="material-symbols-outlined transition-transform duration-300 group-hover:scale-110"
-            >
-              shopping_bag
-            </span>
-          </a>
-          <a
-            href="/login.html"
-            aria-label="Abrir perfil do usuário"
-            class="group cursor-pointer transition-all duration-300 hover:text-[#C5A059]"
-          >
-            <span
-              class="material-symbols-outlined transition-transform duration-300 group-hover:scale-110"
-            >
-              person
-            </span>
-          </a>
-        </div>
-      </div>
-    </header>
+      LUPIÈRE
+    </div>
+
+    <!-- ICONES -->
+    <div class="flex items-center gap-5 md:gap-8 text-[#1B3022]">
+      <a href="carrinho.html" class="icon-btn">
+        <span class="material-symbols-outlined">shopping_bag</span>
+      </a>
+      <a href="/login.html" class="icon-btn">
+        <span class="material-symbols-outlined">person</span>
+      </a>
+    </div>
+  </div>
+</header>
+<!-- MENU MOBILE -->
+<div
+  id="mobileMenu"
+  class="fixed top-0 left-[-100%] w-72 h-full bg-[#FAF9F4] z-50 transition-all duration-300 shadow-xl p-8 flex flex-col gap-8"
+>
+  <div class="flex justify-between items-center">
+    <span class="font-label-caps text-sm tracking-widest">MENU</span>
+    <button id="closeMenu">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <a class="nav-link" href="index.html">Bespoke</a>
+  <a class="nav-link" href="produtos.html">Collections</a>
+  <a class="nav-link" href="acessorios.html">Accessories</a>
+  <a class="nav-link" href="sobre.html">Our Story</a>
+</div>
+
+<!-- OVERLAY -->
+<div
+  id="overlay"
+  class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-all duration-300 z-40"
+></div>
     <main>
       <!-- Hero Section -->
       <section class="relative h-screen w-full overflow-hidden">
@@ -503,5 +505,7 @@
         </div>
       </footer>
     </main>
+
+    <script src="main.js"></script>
   </body>
 </html>

@@ -146,6 +146,13 @@
       <div
         class="flex justify-between items-center w-full px-12 py-8 max-w-[1440px] mx-auto"
       >
+        <!-- BOTÃO MOBILE -->
+        <button
+          id="menuBtn"
+          class="md:hidden text-[#1B3022] dark:text-[#EAEAEA]"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
         <div
           class="text-2xl font-serif tracking-[0.4em] text-[#1B3022] dark:text-[#EAEAEA]"
         >
@@ -201,6 +208,31 @@
         </div>
       </div>
     </header>
+    <!-- MENU MOBILE -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 left-[-100%] w-72 h-full bg-[#F9F7F2]/90 dark:bg-[#121212]/90 backdrop-blur-xl z-50 transition-all duration-300 shadow-2xl p-8 flex flex-col gap-8"
+    >
+      <div class="flex justify-between items-center">
+        <span class="font-serif uppercase tracking-widest text-xs">Menu</span>
+        <button id="closeMenu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <a class="mobile-link" href="index.html">Bespoke</a>
+      <a class="mobile-link text-[#C5A059]" href="produtos.html">Collections</a>
+      <a class="mobile-link" href="acessorios.html"
+        >Accessories</a
+      >
+      <a class="mobile-link" href="sobre.html">Our Story</a>
+    </div>
+
+    <!-- OVERLAY -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-all duration-300 z-40"
+    ></div>
     <main class="max-w-[1440px] mx-auto px-8 md:px-margin-edge">
       <!-- Page Header -->
       <section class="mt-24 mb-16 max-w-3xl">
@@ -521,5 +553,7 @@
         </div>
       </div>
     </footer>
+
+    <script src="main.js"></script>
   </body>
 </html>

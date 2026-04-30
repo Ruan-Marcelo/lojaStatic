@@ -137,66 +137,99 @@
     class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed"
   >
     <!-- TopNavBar Navigation Shell -->
-    <nav
-      class="fixed top-0 w-full z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10"
+    <header
+      class="bg-[#F9F7F2] dark:bg-[#121212] docked full-width top-0 border-b border-[#1B3022]/10 dark:border-white/10 sticky z-50"
     >
       <div
-        class="flex justify-between items-center h-20 px-8 md:px-12 max-w-[1600px] mx-auto"
+        class="flex justify-between items-center w-full px-12 py-8 max-w-[1440px] mx-auto"
       >
-        <!-- Brand Logo -->
+        <!-- BOTÃO MOBILE -->
+        <button
+          id="menuBtn"
+          class="md:hidden text-[#1B3022] dark:text-[#EAEAEA]"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
         <div
-          class="text-2xl font-headline-md tracking-[0.3em] font-light text-[#1B3022]"
+          class="text-2xl font-serif tracking-[0.4em] text-[#1B3022] dark:text-[#EAEAEA]"
         >
           LUPIÈRE
         </div>
-        <!-- Links -->
-        <div class="hidden md:flex space-x-10 items-center">
+        <nav class="hidden md:flex items-center space-x-12">
           <a
-            class="text-[#1B3022] hover:opacity-70 transition-opacity font-headline-md tracking-tight text-sm uppercase"
+            class="font-serif uppercase tracking-[0.2em] text-xs font-medium text-[#1B3022]/60 dark:text-[#EAEAEA]/60 hover:text-[#C5A059] transition-all duration-500"
             href="index.html"
             >Bespoke</a
           >
           <a
-            class="text-[#1B3022] border-b border-[#1B3022] pb-1 font-headline-md tracking-tight text-sm uppercase"
+            class="font-serif uppercase tracking-[0.2em] text-xs font-medium text-[#1B3022] dark:text-white border-b border-[#C5A059] pb-1"
             href="produtos.html"
             >Collections</a
           >
           <a
-            class="text-[#1B3022] hover:opacity-70 transition-opacity font-headline-md tracking-tight text-sm uppercase"
+            class="font-serif uppercase tracking-[0.2em] text-xs font-medium text-[#1B3022]/60 dark:text-[#EAEAEA]/60 hover:text-[#C5A059] transition-all duration-500"
             href="acessorios.html"
             >Accessories</a
           >
           <a
-            class="text-[#1B3022] hover:opacity-70 transition-opacity font-headline-md tracking-tight text-sm uppercase"
+            class="font-serif uppercase tracking-[0.2em] text-xs font-medium text-[#1B3022]/60 dark:text-[#EAEAEA]/60 hover:text-[#C5A059] transition-all duration-500"
             href="sobre.html"
             >Our Story</a
           >
+        </nav>
+        <div
+          class="flex items-center space-x-6 text-[#1B3022] dark:text-[#EAEAEA]"
+        >
           <a
-            class="text-[#1B3022] hover:opacity-70 transition-opacity font-headline-md tracking-tight text-sm uppercase"
-            href="atelier.html"
-            >Atelier</a
+            href="carrinho.html"
+            aria-label="Abrir carrinho"
+            class="group cursor-pointer transition-all duration-300 hover:text-[#C5A059]"
           >
-        </div>
-        <!-- Icons -->
-        <div class="flex items-center space-x-6 text-[#1B3022]">
-          <button class="hover:opacity-80 transition-all duration-300">
-            <span class="material-symbols-outlined" data-icon="search"
-              >search</span
+            <span
+              class="material-symbols-outlined transition-transform duration-300 group-hover:scale-110"
             >
-          </button>
-          <button class="hover:opacity-80 transition-all duration-300">
-            <span class="material-symbols-outlined" data-icon="shopping_bag"
-              >shopping_bag</span
+              shopping_bag
+            </span>
+          </a>
+          <a
+            href="/login.html"
+            aria-label="Abrir perfil do usuário"
+            class="group cursor-pointer transition-all duration-300 hover:text-[#C5A059]"
+          >
+            <span
+              class="material-symbols-outlined transition-transform duration-300 group-hover:scale-110"
             >
-          </button>
-          <button class="hover:opacity-80 transition-all duration-300">
-            <span class="material-symbols-outlined" data-icon="person"
-              >person</span
-            >
-          </button>
+              person
+            </span>
+          </a>
         </div>
       </div>
-    </nav>
+    </header>
+    <!-- MENU MOBILE -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 left-[-100%] w-72 h-full bg-[#F9F7F2]/90 dark:bg-[#121212]/90 backdrop-blur-xl z-50 transition-all duration-300 shadow-2xl p-8 flex flex-col gap-8"
+    >
+      <div class="flex justify-between items-center">
+        <span class="font-serif uppercase tracking-widest text-xs">Menu</span>
+        <button id="closeMenu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <a class="mobile-link" href="index.html">Bespoke</a>
+      <a class="mobile-link" href="produtos.html">Collections</a>
+      <a class="mobile-link text-[#C5A059]" href="acessorios.html"
+        >Accessories</a
+      >
+      <a class="mobile-link" href="sobre.html">Our Story</a>
+    </div>
+
+    <!-- OVERLAY -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-all duration-300 z-40"
+    ></div>
     <main class="pt-32 pb-24">
       <div class="max-w-[1400px] mx-auto px-8 md:px-12">
         <!-- Breadcrumbs -->
@@ -513,5 +546,7 @@
         </p>
       </div>
     </footer>
+
+    <script src="main.js"></script>
   </body>
 </html>
