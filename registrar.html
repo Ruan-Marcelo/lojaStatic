@@ -1,0 +1,393 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LUPIÈRE | Registrar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface-container-high": "#e9e8e3",
+              "surface-container": "#efeee9",
+              surface: "#faf9f4",
+              "on-secondary-container": "#745c00",
+              "secondary-container": "#fed65b",
+              "on-primary-container": "#819986",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              error: "#ba1a1a",
+              background: "#faf9f4",
+              "primary-fixed-dim": "#b4cdb8",
+              "surface-container-low": "#f5f4ef",
+              "surface-container-highest": "#e3e3de",
+              "secondary-fixed-dim": "#e9c349",
+              "on-tertiary-fixed-variant": "#474747",
+              "outline-variant": "#c3c8c1",
+              "primary-container": "#1b3022",
+              "on-tertiary-container": "#939292",
+              "surface-variant": "#e3e3de",
+              "on-surface-variant": "#434843",
+              "on-tertiary-fixed": "#1b1c1c",
+              "on-secondary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              tertiary: "#161717",
+              "inverse-surface": "#30312e",
+              "tertiary-container": "#2b2b2b",
+              secondary: "#735c00",
+              primary: "#061b0e",
+              "on-secondary-fixed-variant": "#574500",
+              "surface-bright": "#faf9f4",
+              "on-background": "#1b1c19",
+              "primary-fixed": "#d0e9d4",
+              "tertiary-fixed": "#e4e2e1",
+              "on-surface": "#1b1c19",
+              "inverse-primary": "#b4cdb8",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#ffe088",
+              outline: "#737973",
+              "on-primary-fixed": "#0b2013",
+              "surface-tint": "#4d6453",
+              "inverse-on-surface": "#f2f1ec",
+              "tertiary-fixed-dim": "#c8c6c5",
+              "on-primary-fixed-variant": "#364c3c",
+              "on-secondary-fixed": "#241a00",
+              "surface-dim": "#dbdad5",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              gutter: "24px",
+              unit: "8px",
+              "margin-edge": "40px",
+              "container-max": "1280px",
+              "section-gap": "120px",
+            },
+            fontFamily: {
+              "body-md": ["Manrope"],
+              "headline-lg": ["Noto Serif"],
+              "body-lg": ["Manrope"],
+              "label-caps": ["Manrope"],
+              "headline-md": ["Noto Serif"],
+              "headline-display": ["Noto Serif"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-lg": [
+                "40px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "0.15em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "400" }],
+              "headline-display": [
+                "64px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "400",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .form-input-bespoke {
+        border: none;
+        border-bottom: 1px solid rgba(27, 48, 34, 0.2);
+        background: transparent;
+        border-radius: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .form-input-bespoke:focus {
+        border-bottom: 1px solid #735c00;
+        box-shadow: none;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-surface font-body-md min-h-screen flex flex-col"
+  >
+    <!-- TopAppBar Section -->
+    <header
+      class="bg-[#FDFCFB] dark:bg-[#121212] border-b border-[#1B3022]/10 dark:border-white/10 sticky top-0 z-50"
+    >
+      <div
+        class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto"
+      >
+        <h1
+          class="text-2xl font-light tracking-[0.3em] uppercase text-[#1B3022] dark:text-white"
+        >
+          LUPIÈRE
+        </h1>
+        <nav class="hidden md:flex space-x-8">
+          <a
+            class="font-serif uppercase tracking-[0.15em] text-xs text-[#1B3022]/60 hover:text-[#D4AF37] transition-colors duration-300"
+            href="#"
+            >Collections</a
+          >
+          <a
+            class="font-serif uppercase tracking-[0.15em] text-xs text-[#1B3022]/60 hover:text-[#D4AF37] transition-colors duration-300"
+            href="#"
+            >The Atelier</a
+          >
+          <a
+            class="font-serif uppercase tracking-[0.15em] text-xs text-[#1B3022]/60 hover:text-[#D4AF37] transition-colors duration-300"
+            href="#"
+            >Bespeak</a
+          >
+        </nav>
+        <div class="flex items-center gap-6">
+          <button class="text-[#1B3022] hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined" data-icon="close"
+              >close</span
+            >
+          </button>
+        </div>
+      </div>
+    </header>
+    <main
+      class="flex-grow flex items-center justify-center py-section-gap px-gutter"
+    >
+      <div
+        class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+      >
+        <!-- Branding/Image Side -->
+        <div class="hidden md:block relative h-[700px]">
+          <div
+            class="absolute inset-0 bg-primary-container/5 mix-blend-multiply z-10"
+          ></div>
+          <img
+            alt="Bespoke Tailoring"
+            class="w-full h-full object-cover"
+            data-alt="A cinematic, high-contrast close-up of a master tailor's hands working on a dark forest green wool blazer. The lighting is soft and editorial, highlighting the intricate textures of the premium fabric and the gleam of a gold needle. The scene is set in a minimalist, sun-drenched atelier with pristine white walls and natural wood accents. The overall mood is one of quiet luxury, tradition, and meticulous craftsmanship, reflecting the Lupière brand identity."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP5RPjGWcwf_mephUfnIzNbEy2-oq3MjBvNWOQH2lsATXiGMBG-UwyMeKbWcZgaBNLUGZQpf-g-m7z7rHknez8VBLaNnv1Hczya4b-M-N0qPzF4yr7inq9XI15RcsLWeM0bA9y2y3ruu_fg4B3a5AcCu_XVYjAcKzylb_NBv8MIhyVy9I2H5V6_pHesplt-lE_bdZ4Iuzym2f1798HhvmXBtNfL-0AsZTKpbd8A4Hd6p3NPx2_jlzBHRQT3De7r-4S1fHchXOMpmgR"
+          />
+          <div class="absolute bottom-12 left-12 z-20 text-white">
+            <p
+              class="font-label-caps text-label-caps text-surface uppercase tracking-[0.2em] mb-4"
+            >
+              Established 1984
+            </p>
+            <p class="font-headline-md text-headline-md italic max-w-sm">
+              "True elegance is the absence of noise."
+            </p>
+          </div>
+        </div>
+        <!-- Registration Form Side -->
+        <div
+          class="flex flex-col justify-center max-w-md mx-auto md:mx-0 w-full"
+        >
+          <header class="mb-12">
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-2">
+              Join the Atelier
+            </h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant italic">
+              Enter the world of Lupière.
+            </p>
+          </header>
+          <form class="space-y-8">
+            <div class="space-y-6">
+              <div class="relative">
+                <label
+                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
+                  for="full_name"
+                  >Full Name</label
+                >
+                <input
+                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
+                  id="full_name"
+                  name="full_name"
+                  placeholder="Alexander Sterling"
+                  type="text"
+                />
+              </div>
+              <div class="relative">
+                <label
+                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
+                  for="email"
+                  >Email Address</label
+                >
+                <input
+                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
+                  id="email"
+                  name="email"
+                  placeholder="a.sterling@ateliers.com"
+                  type="email"
+                />
+              </div>
+              <div class="relative">
+                <label
+                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
+                  for="phone"
+                  >Phone Number</label
+                >
+                <input
+                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
+                  id="phone"
+                  name="phone"
+                  placeholder="+44 (0) 20 7946 0000"
+                  type="tel"
+                />
+              </div>
+              <div class="relative">
+                <label
+                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
+                  for="password"
+                  >Password</label
+                >
+                <input
+                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
+                  id="password"
+                  name="password"
+                  placeholder="••••••••••••"
+                  type="password"
+                />
+              </div>
+            </div>
+            <div class="flex items-center space-x-3 pt-4">
+              <input
+                class="w-4 h-4 text-primary border-outline-variant focus:ring-secondary rounded-none"
+                id="newsletter"
+                type="checkbox"
+              />
+              <label
+                class="font-body-md text-body-md text-on-surface-variant"
+                for="newsletter"
+              >
+                Join the exclusive newsletter for seasonal lookbooks and private
+                viewings.
+              </label>
+            </div>
+            <div class="pt-8 space-y-6">
+              <button
+                class="w-full bg-primary-container text-white py-5 font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary transition-all duration-300"
+                type="submit"
+              >
+                Create Account
+              </button>
+              <div class="flex items-center justify-between">
+                <span class="h-px bg-outline-variant/30 flex-grow"></span>
+                <span
+                  class="px-4 font-label-caps text-[10px] text-outline uppercase"
+                  >Or</span
+                >
+                <span class="h-px bg-outline-variant/30 flex-grow"></span>
+              </div>
+              <button
+                class="w-full border border-outline/30 text-primary py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-3"
+                type="button"
+              >
+                <img
+                  src="https://developers.google.com/identity/images/g-logo.png"
+                  alt="Google"
+                  class="w-5 h-5"
+                />
+                Continue com Google
+              </button>
+              <button
+                class="w-full border border-outline/30 text-primary py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-3"
+                type="button"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    d="M16.365 1.43c0 1.14-.463 2.21-1.24 3.02-.81.84-2.14 1.48-3.28 1.39-.14-1.12.41-2.25 1.16-3.06.77-.84 2.09-1.45 3.36-1.35zm4.3 16.11c-.68 1.55-1.5 2.98-2.76 2.99-1.23.02-1.63-.79-3.05-.79-1.42 0-1.87.77-3.02.81-1.22.05-2.16-1.6-2.86-3.14-1.38-3.02-2.44-8.55 1.92-11.06 1.08-.63 2.3-.99 3.58-.99 1.4 0 2.62.9 3.42.9.8 0 2.3-1.11 3.88-.95.66.03 2.5.27 3.69 2.01-.1.06-2.2 1.28-2.18 3.82.02 3.03 2.66 4.03 2.69 4.05-.02.07-.42 1.44-1.33 2.35z"
+                  />
+                </svg>
+                Continue com Apple
+              </button>
+            </div>
+          </form>
+          <p
+            class="mt-12 text-center font-body-md text-on-surface-variant text-sm"
+          >
+            Already part of the world?
+            <a
+              class="text-secondary font-semibold hover:underline underline-offset-4"
+              href="login.html"
+              >logar</a
+            >
+          </p>
+        </div>
+      </div>
+    </main>
+    <!-- Footer Section -->
+    <footer class="bg-[#FDFCFB] dark:bg-[#121212] border-t border-[#D4AF37]/30">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-16 mt-20 max-w-7xl mx-auto"
+      >
+        <p
+          class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40"
+        >
+          © 2024 LUPIÈRE BESPOKE. ALL RIGHTS RESERVED.
+        </p>
+        <div class="flex space-x-12 mt-8 md:mt-0">
+          <a
+            class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 hover:text-[#1B3022] dark:hover:text-white underline-offset-4 underline transition-all"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 hover:text-[#1B3022] dark:hover:text-white underline-offset-4 underline transition-all"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 hover:text-[#1B3022] dark:hover:text-white underline-offset-4 underline transition-all"
+            href="#"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
