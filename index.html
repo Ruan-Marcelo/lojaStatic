@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:wght@400&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -132,66 +132,66 @@
   </head>
   <body class="bg-surface text-on-surface antialiased">
     <!-- TopNavBar -->
-<header
-  class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-20 flex items-center transition-all duration-300"
->
-  <div
-    class="flex justify-between items-center w-full px-6 md:px-16 max-w-[1440px] mx-auto"
-  >
-    <!-- BOTÃO MENU MOBILE -->
-    <button id="menuBtn" class="lg:hidden text-[#1B3022]">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
-
-    <!-- NAV DESKTOP -->
-    <nav class="hidden lg:flex gap-10">
-      <a class="nav-link" href="index.html">Bespoke</a>
-      <a class="nav-link" href="produtos.html">Collections</a>
-      <a class="nav-link" href="acessorios.html">Accessories</a>
-      <a class="nav-link" href="sobre.html">Our Story</a>
-    </nav>
-
-    <!-- LOGO -->
-    <div
-      class="text-xl md:text-2xl font-headline-lg tracking-[0.4em] text-[#1B3022]"
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-20 flex items-center transition-all duration-300"
     >
-      LUPIÈRE
+      <div
+        class="flex justify-between items-center w-full px-6 md:px-16 max-w-[1440px] mx-auto"
+      >
+        <!-- BOTÃO MENU MOBILE -->
+        <button id="menuBtn" class="lg:hidden text-[#1B3022]">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <!-- NAV DESKTOP -->
+        <nav class="hidden lg:flex gap-10">
+          <a class="nav-link" href="index.html">Inicio</a>
+          <a class="nav-link" href="produtos.html">Coleções</a>
+          <a class="nav-link" href="acessorios.html">Acessórios</a>
+          <a class="nav-link" href="sobre.html">Nossa história</a>
+        </nav>
+
+        <!-- LOGO -->
+        <div
+          class="text-xl md:text-2xl font-headline-lg tracking-[0.4em] text-[#1B3022]"
+        >
+          LUPIÈRE
+        </div>
+
+        <!-- ICONES -->
+        <div class="flex items-center gap-5 md:gap-8 text-[#1B3022]">
+          <a href="carrinho.html" class="icon-btn">
+            <span class="material-symbols-outlined">shopping_bag</span>
+          </a>
+          <a href="/login.html" class="icon-btn">
+            <span class="material-symbols-outlined">person</span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- MENU MOBILE -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 left-[-100%] w-72 h-full bg-[#FAF9F4] z-50 transition-all duration-300 shadow-xl p-8 flex flex-col gap-8"
+    >
+      <div class="flex justify-between items-center">
+        <span class="font-label-caps text-sm tracking-widest">MENU</span>
+        <button id="closeMenu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link" href="produtos.html">Coleções</a>
+      <a class="nav-link" href="acessorios.html">Acessórios</a>
+      <a class="nav-link" href="sobre.html">Nossa história</a>
     </div>
 
-    <!-- ICONES -->
-    <div class="flex items-center gap-5 md:gap-8 text-[#1B3022]">
-      <a href="carrinho.html" class="icon-btn">
-        <span class="material-symbols-outlined">shopping_bag</span>
-      </a>
-      <a href="/login.html" class="icon-btn">
-        <span class="material-symbols-outlined">person</span>
-      </a>
-    </div>
-  </div>
-</header>
-<!-- MENU MOBILE -->
-<div
-  id="mobileMenu"
-  class="fixed top-0 left-[-100%] w-72 h-full bg-[#FAF9F4] z-50 transition-all duration-300 shadow-xl p-8 flex flex-col gap-8"
->
-  <div class="flex justify-between items-center">
-    <span class="font-label-caps text-sm tracking-widest">MENU</span>
-    <button id="closeMenu">
-      <span class="material-symbols-outlined">close</span>
-    </button>
-  </div>
-
-  <a class="nav-link" href="index.html">Bespoke</a>
-  <a class="nav-link" href="produtos.html">Collections</a>
-  <a class="nav-link" href="acessorios.html">Accessories</a>
-  <a class="nav-link" href="sobre.html">Our Story</a>
-</div>
-
-<!-- OVERLAY -->
-<div
-  id="overlay"
-  class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-all duration-300 z-40"
-></div>
+    <!-- OVERLAY -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-all duration-300 z-40"
+    ></div>
     <main>
       <!-- Hero Section -->
       <section class="relative h-screen w-full overflow-hidden">
@@ -199,7 +199,7 @@
           <img
             class="w-full h-full object-cover grayscale-[20%]"
             data-alt="A cinematic portrait of a sophisticated man wearing a bespoke casual tailored linen jacket and trousers. He is standing against a minimalist architectural backdrop with soft morning sunlight casting elegant shadows. The atmosphere is quiet, luxurious, and authoritative, reflecting the premium tailoring brand identity with high-contrast textures."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqDJYff8ZwDXkHEsJDubY76IClI0lZGqx6rKLM9DM6Hzf1sAS3Z7PujHmkQ-UjWqoWD5sX96rqyS4fvv833KhvvFZ4jaRY1IMUiHftP0Th27Tq9hEdqlReSxxcsrBqpusIfUMopoSb82IJSYqsPTNSa2dzaHmrbrQvZ-g-TPJZ7P7ixFIu-fFQSthjjICGpW5GavzH-4xLOvmSlzSmkSMSeHrxpoWf0ajs4dt2uA_Vb3_AR1c6ZvqHicr8XgUEXKMM4_Ur2kpimV90"
+            src="O equilíbrio perfeito entre conforto e elegância.A Polo Piquet Premium Lupière foi criada para m.jpg"
           />
           <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
         </div>
@@ -217,11 +217,12 @@
             >
               Peças feitas para quem impõe presença.
             </p>
-            <button
-              class="bg-primary-container text-surface px-12 py-5 font-label-caps text-label-caps uppercase tracking-[0.2em] hover:bg-on-primary-container transition-all duration-500"
+            <a
+              href="produtos.html"
+              class="bg-primary-container text-surface px-12 py-5 font-label-caps text-label-caps uppercase tracking-[0.2em] hover:bg-on-primary-container transition-all duration-500 inline-block text-center"
             >
               Explorar Coleção
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -270,7 +271,7 @@
             </div>
             <a
               class="font-label-caps text-label-caps text-primary border-b border-primary/20 pb-1 hover:border-secondary transition-all"
-              href="#"
+              href="produtos.html"
               >Ver Tudo</a
             >
           </div>
@@ -358,7 +359,7 @@
             <img
               class="relative z-10 w-full max-w-md mx-auto opacity-90"
               data-alt="The Lupière brand symbol, a minimalist and powerful stylized wolf head icon. The design is geometric and clean, representing heritage, strength, and silent authority. It is rendered in a high-contrast white against a deep forest green background, embodying the luxury tailoring brand's essence."
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZHfRZnC9lPGswLy4_OB0ufa_bAalEzEpBtk1q8L0safqtHT8oQhk-XhqHJ-wDVRKcA1zzxV6IdYmi-Em-htnlRmvZeQDgd4QTmeLB0y-LhWvLfHfElVIAHn2H-mVZgfVrpVl2uZ4atq3JNwFCmUKKDFEfjRGVWeHSzCRwRwKKRSmRiIE8NsWb_1hcIQBUWjLomDkPZf3H_W74Kfi2AC3WYDjdseEtKwjYjyUJd9zBeQ1gDEQpLOZfBFMWGbj9X7UTL0bkRB8ma5NT"
+              src="logo.jpg"
             />
             <div
               class="absolute -bottom-12 -right-12 w-64 h-64 border border-surface/10"
@@ -385,7 +386,7 @@
             <div class="mt-16 flex items-center gap-6">
               <div class="h-[1px] w-12 bg-secondary-fixed-dim"></div>
               <span class="font-label-caps text-[10px] tracking-[0.3em]"
-                >EST. 2024 — ALTA ALFAIATARIA</span
+                >EST. 2025 — ALTA ALFAIATARIA</span
               >
             </div>
           </div>
@@ -413,49 +414,39 @@
             <h4
               class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
             >
-              Explore
+              Explorar
             </h4>
             <a
               class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
               href="#"
-              >Bespoke</a
+              >Inicio</a
             >
             <a
               class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
               href="#"
-              >Collections</a
+              >Coleções</a
             >
             <a
               class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
               href="#"
-              >Accessories</a
-            >
-            <a
-              class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-              href="#"
-              >Atelier</a
+              >Acessórios</a
             >
           </div>
           <div class="flex flex-col gap-4">
             <h4
               class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
             >
-              Customer Care
+              Atendimento ao Cliente
             </h4>
             <a
               class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
               href="#"
-              >Sustainability</a
+              >Envio &amp; Devoluções</a
             >
             <a
               class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
               href="#"
-              >Shipping &amp; Returns</a
-            >
-            <a
-              class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-              href="#"
-              >Privacy Policy</a
+              >Política de Privacidade</a
             >
           </div>
           <div class="flex flex-col gap-4">
@@ -469,13 +460,17 @@
               1250-146 Lisboa, Portugal
             </p>
             <div class="mt-4 flex gap-6">
-              <a class="text-[#1B3022]/60 hover:text-[#1B3022]" href="#"
-                ><span class="material-symbols-outlined text-[20px]"
-                  >public</span
-                ></a
+              <a
+                class="text-[#1B3022]/60 hover:text-[#1B3022]"
+                href="https://www.instagram.com/uselupiere/"
+                target="_blank"
               >
-              <a class="text-[#1B3022]/60 hover:text-[#1B3022]" href="#"
-                ><span class="material-symbols-outlined text-[20px]"
+                <span class="material-symbols-outlined text-[20px]">
+                  photo_camera
+                </span>
+              </a>
+              <a class="text-[#1B3022]/60 hover:text-[#1B3022]" href="mailto:info@lupiere.com" target="_blank">
+                <span class="material-symbols-outlined text-[20px]"
                   >mail</span
                 ></a
               >
@@ -488,13 +483,13 @@
           <div
             class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase"
           >
-            © 2024 LUPIÈRE TAILORS. ALL RIGHTS RESERVED.
+            © 2026 LUPIÈRE TAILORS. ALL RIGHTS RESERVED.
           </div>
           <div class="flex gap-8">
             <a
               class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase hover:text-[#1B3022] transition-colors"
               href="#"
-              >Terms</a
+              >Termos</a
             >
             <a
               class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase hover:text-[#1B3022] transition-colors"
