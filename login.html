@@ -150,32 +150,61 @@
   <body
     class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden"
   >
-    <!-- Top Navigation Anchor -->
+    <!-- TopNavBar -->
     <header
-      class="bg-[#FDFCFB] dark:bg-[#121212] border-b border-[#1B3022]/10 dark:border-white/10 sticky top-0 z-50"
+      class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-20 flex items-center transition-all duration-300"
     >
-      <nav
-        class="flex justify-between items-center w-full px-8 py-6 max-w-7xl mx-auto"
+      <div
+        class="flex justify-between items-center w-full px-6 md:px-16 max-w-[1440px] mx-auto"
       >
+        <!-- BOTÃO MENU MOBILE -->
+        <button id="menuBtn" class="lg:hidden text-[#1B3022]">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+        <!-- NAV DESKTOP -->
+        <nav class="hidden lg:flex gap-10">
+          <a class="nav-link" href="index.html">Inicio</a>
+          <a class="nav-link" href="produtos.html">Coleções</a>
+          <a class="nav-link" href="acessorios.html">Acessórios</a>
+          <a class="nav-link" href="sobre.html">Nossa história</a>
+        </nav>
+
+        <!-- LOGO -->
         <div
-          class="font-serif text-2xl font-light tracking-[0.3em] uppercase text-[#1B3022] dark:text-white"
+          class="text-xl md:text-2xl font-headline-lg tracking-[0.4em] text-[#1B3022]"
         >
           LUPIÈRE
         </div>
-        <div class="flex items-center gap-6">
-          <a
-            class="font-serif uppercase tracking-[0.15em] text-xs text-[#1B3022]/60 hover:text-[#D4AF37] transition-colors duration-300"
-            href="#"
-          >
-            <span
-              class="material-symbols-outlined align-middle mr-2"
-              data-icon="close"
-              >close</span
-            >
+
+        <!-- ICONES -->
+        <div class="flex items-center gap-5 md:gap-8 text-[#1B3022]">
+          <a href="carrinho.html" class="icon-btn">
+            <span class="material-symbols-outlined">shopping_bag</span>
+          </a>
+          <a href="/login.html" class="icon-btn">
+            <span class="material-symbols-outlined">person</span>
           </a>
         </div>
-      </nav>
+      </div>
     </header>
+    <!-- MENU MOBILE -->
+    <div
+      id="mobileMenu"
+      class="fixed top-0 left-[-100%] w-72 h-full bg-[#FAF9F4] z-50 transition-all duration-300 shadow-xl p-8 flex flex-col gap-8"
+    >
+      <div class="flex justify-between items-center">
+        <span class="font-label-caps text-sm tracking-widest">MENU</span>
+        <button id="closeMenu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link" href="produtos.html">Coleções</a>
+      <a class="nav-link" href="acessorios.html">Acessórios</a>
+      <a class="nav-link" href="sobre.html">Nossa história</a>
+    </div>
     <main
       class="flex-grow flex items-center justify-center relative px-margin-edge py-section-gap"
     >
@@ -286,7 +315,7 @@
               Não tem uma conta?
               <a
                 class="text-primary font-semibold hover:underline underline-offset-4 ml-1"
-                href="#"
+                href="registrar.html"
                 >Solicite um convite.</a
               >
             </p>
@@ -295,36 +324,116 @@
       </div>
     </main>
     <!-- Footer -->
-    <footer class="bg-[#FDFCFB] dark:bg-[#121212] border-t border-[#D4AF37]/30">
+    <footer
+      class="bg-[#FAF9F4] w-full py-24 px-8 md:px-16 border-t border-[#1B3022]/10"
+    >
       <div
-        class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-16 mt-20 max-w-7xl mx-auto"
+        class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12"
+      >
+        <div class="col-span-1 md:col-span-1">
+          <div
+            class="text-2xl font-headline-lg tracking-[0.3em] text-[#1B3022] uppercase mb-8"
+          >
+            LUPIÈRE
+          </div>
+          <p class="font-body-md text-[#1B3022]/60 max-w-xs">
+            Elevando a alfaiataria clássica para o homem contemporâneo. Rigor,
+            tradição e personalidade.
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4
+            class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
+          >
+            Explorar
+          </h4>
+          <a
+            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
+            href="#"
+            >Inicio</a
+          >
+          <a
+            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
+            href="#"
+            >Coleções</a
+          >
+          <a
+            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
+            href="#"
+            >Acessórios</a
+          >
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4
+            class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
+          >
+            Atendimento ao Cliente
+          </h4>
+          <a
+            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
+            href="#"
+            >Envio &amp; Devoluções</a
+          >
+          <a
+            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
+            href="#"
+            >Política de Privacidade</a
+          >
+        </div>
+        <div class="flex flex-col gap-4">
+          <h4
+            class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
+          >
+            Atelier
+          </h4>
+          <p class="font-body-md text-[#1B3022]/60">
+            Avenida da Liberdade, 110<br />
+            1250-146 Lisboa, Portugal
+          </p>
+          <div class="mt-4 flex gap-6">
+            <a
+              class="text-[#1B3022]/60 hover:text-[#1B3022]"
+              href="https://www.instagram.com/uselupiere/"
+              target="_blank"
+            >
+              <span class="material-symbols-outlined text-[20px]">
+                photo_camera
+              </span>
+            </a>
+            <a
+              class="text-[#1B3022]/60 hover:text-[#1B3022]"
+              href="mailto:info@lupiere.com"
+              target="_blank"
+            >
+              <span class="material-symbols-outlined text-[20px]">mail</span></a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-[1440px] mx-auto mt-24 pt-12 border-t border-[#1B3022]/5 flex flex-col md:flex-row justify-between items-center gap-6"
       >
         <div
-          class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 mb-6 md:mb-0"
+          class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase"
         >
-          © 2024 LUPIÈRE BESPOKE. ALL RIGHTS RESERVED.
+          © 2026 LUPIÈRE TAILORS. ALL RIGHTS RESERVED.
         </div>
         <div class="flex gap-8">
           <a
-            class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 hover:text-[#1B3022] dark:hover:text-white underline-offset-4 underline transition-all"
+            class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase hover:text-[#1B3022] transition-colors"
             href="#"
-            >Privacy Policy</a
+            >Termos</a
           >
           <a
-            class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 hover:text-[#1B3022] dark:hover:text-white underline-offset-4 underline transition-all"
+            class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase hover:text-[#1B3022] transition-colors"
             href="#"
-            >Terms of Service</a
-          >
-          <a
-            class="font-serif text-[10px] uppercase tracking-widest text-[#1B3022]/50 dark:text-white/40 hover:text-[#1B3022] dark:hover:text-white underline-offset-4 underline transition-all"
-            href="#"
-            >Contact Us</a
+            >Cookies</a
           >
         </div>
       </div>
     </footer>
     <!-- Decorative Image Section (Hidden on mobile for focus) -->
-    <div
+    <!-- <div
       class="hidden lg:block fixed right-0 top-0 bottom-0 w-1/3 bg-surface-container"
     >
       <img
@@ -332,6 +441,6 @@
         data-alt="A macro photography shot of high-quality wool fabric being measured by a professional tailor in a sun-drenched atelier. The lighting is high-contrast and editorial, highlighting the intricate texture of the charcoal grey suit material. The overall aesthetic is one of quiet, minimalist luxury and artisanal craftsmanship, consistent with a high-end bespoke fashion brand's identity. The atmosphere is serene and focused, evoking a sense of heritage and precision."
         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEPnB4MRjWEUoOu4BwW5dCYVHQCfJL-CVe9sD05-hddvldTXOu2zsSBQ-qtmwScA5QRPTa0fmdXVZ9cI0Pe2XAZUZye2kwOWsKitnMzh6nHqcPyASNjvnr4Y1HhrV1ah6JXoZvQtvx9P8FUkrgu2A29uG9OjPfUryD9mOg0Anl6buRGfokEn8E_Y8S0x4jYO8I3X5rzO_CLhwyopWzop1PecSu6VDwD16exurUihlR9ar1MGjKOaNsQb_c0Hak150C6Yw0m48QctrF"
       />
-    </div>
+    </div> -->
   </body>
 </html>
