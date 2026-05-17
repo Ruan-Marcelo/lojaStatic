@@ -223,6 +223,39 @@ function obter_pedidos_usuario($usuario_id, $limite = null, $offset = null) {
     return $stmt->fetchAll();
 }
 
+// Função para contar pedidos do usuário
+function contar_pedidos_usuario($usuario_id) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM pedidos WHERE usuario_id = ?");
+    $stmt->execute([$usuario_id]);
+    $result = $stmt->fetch();
+    return $result['total'];
+}
+
+// Função para contar categorias
+function contar_categorias() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) as total FROM categorias");
+    $result = $stmt->fetch();
+    return $result['total'];
+}
+
+// Função para contar usuários
+function contar_usuarios() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) as total FROM usuarios");
+    $result = $stmt->fetch();
+    return $result['total'];
+}
+
+// Função para contar pedidos (admin)
+function contar_pedidos() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) as total FROM pedidos");
+    $result = $stmt->fetch();
+    return $result['total'];
+}
+
 // Função para finalizar compra (criar pedido e itens)
 function finalizar_compra($usuario_id, $carrinho, $total, $endereco_entrega) {
     global $pdo;
