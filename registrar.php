@@ -3,522 +3,516 @@ session_start();
 require_once 'funcoes.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $nome = $_POST["full_name"];
-  $email = $_POST["email"];
-  $telefone = $_POST["phone"];
-  $senha = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-  // Verifica se o email já existe
-  $usuario_existente = obter_usuario_por_email($email);
-  if ($usuario_existente) {
-    $erro = "Este email já está cadastrado.";
-  } else {
-    // Insere o novo usuário no banco de dados
-    $conn = conectar_db();
-    $sql = "INSERT INTO usuarios (nome, email, telefone, senha) VALUES ('$nome', '$email', '$telefone', '$senha')";
-    if ($conn->query($sql) === TRUE) {
-      $sucesso = "Conta criada com sucesso! Você já pode fazer login.";
+    $nome = trim($_POST["full_name"] ?? '');
+    $email = trim($_POST["email"] ?? '');
+    $telefone = trim($_POST["telefone"] ?? '');
+    $senha = $_POST["password"] ?? '';
+
+    // Validação
+    if (empty($nome) || empty($email) || empty($senha)) {
+        $erro = "Preencha todos os campos obrigatórios.";
     } else {
-      $erro = "Erro ao criar conta: " . $conn->error;
+
+        // Verifica se email já existe
+        if (obter_usuario_por_email($email)) {
+
+            $erro = "Este email já está cadastrado.";
+
+        } else {
+
+            // Cria usuário usando função do funcoes.php
+            $criado = criar_usuario(
+                $nome,
+                $email,
+                $senha,
+                $telefone
+            );
+
+            if ($criado) {
+
+                $sucesso = "Conta criada com sucesso!";
+
+            } else {
+
+                $erro = "Erro ao criar conta.";
+
+            }
+        }
     }
-    $conn->close();
-  }
 }
 ?>
 <!doctype html>
 
-<html class="light" lang="en">
-  <head>
+<html class="light" lang="pt-BR">
+<head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
     <title>LUPIÈRE | Registrar</title>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Noto+Serif:wght@400;700&display=swap"
+        rel="stylesheet"
     />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-error": "#ffffff",
-              "surface-container-high": "#e9e8e3",
-              "surface-container": "#efeee9",
-              surface: "#faf9f4",
-              "on-secondary-container": "#745c00",
-              "secondary-container": "#fed65b",
-              "on-primary-container": "#819986",
-              "on-tertiary": "#ffffff",
-              "error-container": "#ffdad6",
-              error: "#ba1a1a",
-              background: "#faf9f4",
-              "primary-fixed-dim": "#b4cdb8",
-              "surface-container-low": "#f5f4ef",
-              "surface-container-highest": "#e3e3de",
-              "secondary-fixed-dim": "#e9c349",
-              "on-tertiary-fixed-variant": "#474747",
-              "outline-variant": "#c3c8c1",
-              "primary-container": "#1b3022",
-              "on-tertiary-container": "#939292",
-              "surface-variant": "#e3e3de",
-              "on-surface-variant": "#434843",
-              "on-tertiary-fixed": "#1b1c1c",
-              "on-secondary": "#ffffff",
-              "surface-container-lowest": "#ffffff",
-              tertiary: "#161717",
-              "inverse-surface": "#30312e",
-              "tertiary-container": "#2b2b2b",
-              secondary: "#735c00",
-              primary: "#061b0e",
-              "on-secondary-fixed-variant": "#574500",
-              "surface-bright": "#faf9f4",
-              "on-background": "#1b1c19",
-              "primary-fixed": "#d0e9d4",
-              "tertiary-fixed": "#e4e2e1",
-              "on-surface": "#1b1c19",
-              "inverse-primary": "#b4cdb8",
-              "on-primary": "#ffffff",
-              "on-error-container": "#93000a",
-              "secondary-fixed": "#ffe088",
-              outline: "#737973",
-              "on-primary-fixed": "#0b2013",
-              "surface-tint": "#4d6453",
-              "inverse-on-surface": "#f2f1ec",
-              "tertiary-fixed-dim": "#c8c6c5",
-              "on-primary-fixed-variant": "#364c3c",
-              "on-secondary-fixed": "#241a00",
-              "surface-dim": "#dbdad5",
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
-            spacing: {
-              gutter: "24px",
-              unit: "8px",
-              "margin-edge": "40px",
-              "container-max": "1280px",
-              "section-gap": "120px",
-            },
-            fontFamily: {
-              "body-md": ["Manrope"],
-              "headline-lg": ["Noto Serif"],
-              "body-lg": ["Manrope"],
-              "label-caps": ["Manrope"],
-              "headline-md": ["Noto Serif"],
-              "headline-display": ["Noto Serif"],
-            },
-            fontSize: {
-              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-              "headline-lg": [
-                "40px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "400",
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#faf9f4",
+                        primary: "#061b0e",
+                        secondary: "#735c00",
+                        outline: "#737973",
+                        "outline-variant": "#c3c8c1",
+                        "primary-container": "#1b3022",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f4ef",
+                        "on-surface": "#1b1c19",
+                        "on-surface-variant": "#434843",
+                    },
+
+                    fontFamily: {
+                        body: ["Manrope"],
+                        headline: ["Noto Serif"],
+                    },
                 },
-              ],
-              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
-              "label-caps": [
-                "12px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "0.15em",
-                  fontWeight: "600",
-                },
-              ],
-              "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "400" }],
-              "headline-display": [
-                "64px",
-                {
-                  lineHeight: "1.1",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "400",
-                },
-              ],
             },
-          },
-        },
-      };
+        };
     </script>
+
     <style>
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 300,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-      .form-input-bespoke {
-        border: none;
-        border-bottom: 1px solid rgba(27, 48, 34, 0.2);
-        background: transparent;
-        border-radius: 0;
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .form-input-bespoke:focus {
-        border-bottom: 1px solid #735c00;
-        box-shadow: none;
-        outline: none;
-      }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .headline {
+            font-family: 'Noto Serif', serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                "FILL" 0,
+                "wght" 300,
+                "GRAD" 0,
+                "opsz" 24;
+        }
+
+        .form-input-bespoke {
+            border: none;
+            border-bottom: 1px solid rgba(27, 48, 34, 0.2);
+            background: transparent;
+            border-radius: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .form-input-bespoke:focus {
+            border-bottom: 1px solid #735c00;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .nav-link {
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #735c00;
+        }
+
+        .icon-btn:hover {
+            color: #735c00;
+            transition: 0.3s;
+        }
+
     </style>
-  </head>
-  <body
-    class="bg-background text-on-surface font-body-md min-h-screen flex flex-col"
-  >
-    <!-- TopNavBar -->
-    <header
-      class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-20 flex items-center transition-all duration-300"
-    >
-      <div
-        class="flex justify-between items-center w-full px-6 md:px-16 max-w-[1440px] mx-auto"
-      >
-        <!-- BOTÃO MENU MOBILE -->
+</head>
+
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F4]/95 backdrop-blur-md border-b border-[#1B3022]/10 h-20 flex items-center">
+
+    <div class="flex justify-between items-center w-full px-6 md:px-16 max-w-[1440px] mx-auto">
+
+        <!-- MENU MOBILE -->
         <button id="menuBtn" class="lg:hidden text-[#1B3022]">
-          <span class="material-symbols-outlined">menu</span>
+            <span class="material-symbols-outlined">menu</span>
         </button>
 
-        <!-- NAV DESKTOP -->
+        <!-- NAV -->
         <nav class="hidden lg:flex gap-10">
-          <a class="nav-link" href="index.html">Inicio</a>
-          <a class="nav-link" href="produtos.html">Coleções</a>
-          <a class="nav-link" href="acessorios.html">Acessórios</a>
-          <a class="nav-link" href="sobre.html">Nossa história</a>
+
+            <a class="nav-link" href="index.php">Inicio</a>
+
+            <a class="nav-link" href="produtos.php">Coleções</a>
+
+            <a class="nav-link" href="acessorios.php">Acessórios</a>
+
+            <a class="nav-link" href="sobre.php">Nossa história</a>
+
         </nav>
 
         <!-- LOGO -->
-        <div
-          class="text-xl md:text-2xl font-headline-lg tracking-[0.4em] text-[#1B3022]"
-        >
-          LUPIÈRE
+        <div class="text-xl md:text-2xl headline tracking-[0.4em] text-[#1B3022]">
+            LUPIÈRE
         </div>
 
         <!-- ICONES -->
         <div class="flex items-center gap-5 md:gap-8 text-[#1B3022]">
-          <a href="carrinho.html" class="icon-btn">
-            <span class="material-symbols-outlined">shopping_bag</span>
-          </a>
-          <a href="/login.html" class="icon-btn">
-            <span class="material-symbols-outlined">person</span>
-          </a>
-        </div>
-      </div>
-    </header>
-    <!-- MENU MOBILE -->
-    <div
-      id="mobileMenu"
-      class="fixed top-0 left-[-100%] w-72 h-full bg-[#FAF9F4] z-50 transition-all duration-300 shadow-xl p-8 flex flex-col gap-8"
-    >
-      <div class="flex justify-between items-center">
-        <span class="font-label-caps text-sm tracking-widest">MENU</span>
-        <button id="closeMenu">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
 
-      <a class="nav-link" href="index.html">Inicio</a>
-      <a class="nav-link" href="produtos.html">Coleções</a>
-      <a class="nav-link" href="acessorios.html">Acessórios</a>
-      <a class="nav-link" href="sobre.html">Nossa história</a>
-    </div>
-    <main
-      class="flex-grow flex items-center justify-center py-section-gap px-gutter"
-    >
-      <div
-        class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
-      >
-        <!-- Branding/Image Side -->
-        <div class="hidden md:block relative h-[700px]">
-          <div
-            class="absolute inset-0 bg-primary-container/5 mix-blend-multiply z-10"
-          ></div>
-          <img
-            alt="Bespoke Tailoring"
-            class="w-full h-full object-cover"
-            data-alt="A cinematic, high-contrast close-up of a master tailor's hands working on a dark forest green wool blazer. The lighting is soft and editorial, highlighting the intricate textures of the premium fabric and the gleam of a gold needle. The scene is set in a minimalist, sun-drenched atelier with pristine white walls and natural wood accents. The overall mood is one of quiet luxury, tradition, and meticulous craftsmanship, reflecting the Lupière brand identity."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP5RPjGWcwf_mephUfnIzNbEy2-oq3MjBvNWOQH2lsATXiGMBG-UwyMeKbWcZgaBNLUGZQpf-g-m7z7rHknez8VBLaNnv1Hczya4b-M-N0qPzF4yr7inq9XI15RcsLWeM0bA9y2y3ruu_fg4B3a5AcCu_XVYjAcKzylb_NBv8MIhyVy9I2H5V6_pHesplt-lE_bdZ4Iuzym2f1798HhvmXBtNfL-0AsZTKpbd8A4Hd6p3NPx2_jlzBHRQT3De7r-4S1fHchXOMpmgR"
-          />
-          <div class="absolute bottom-12 left-12 z-20 text-white">
-            <p
-              class="font-label-caps text-label-caps text-surface uppercase tracking-[0.2em] mb-4"
-            >
-              Established 1984
-            </p>
-            <p class="font-headline-md text-headline-md italic max-w-sm">
-              "True elegance is the absence of noise."
-            </p>
-          </div>
-        </div>
-        <!-- Registration Form Side -->
-        <div
-          class="flex flex-col justify-center max-w-md mx-auto md:mx-0 w-full"
-        >
-          <header class="mb-12">
-            <h2 class="font-headline-lg text-headline-lg text-primary mb-2">
-              Junte-se ao Atelier
-            </h2>
-            <p class="font-body-lg text-body-lg text-on-surface-variant italic">
-              Entre no mundo de Lupière.
-            </p>
-          </header>
-          <form class="space-y-8" method="post">
-            <div class="space-y-6">
-              <div class="relative">
-                <label
-                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
-                  for="full_name"
-                  >Full Name</label
-                >
-                <input
-                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
-                  id="full_name"
-                  name="full_name"
-                  placeholder="Alexander Sterling"
-                  type="text"
-                />
-              </div>
-              <div class="relative">
-                <label
-                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
-                  for="email"
-                  >Email Address</label
-                >
-                <input
-                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
-                  id="email"
-                  name="email"
-                  placeholder="a.sterling@ateliers.com"
-                  type="email"
-                />
-              </div>
-              <div class="relative">
-                <label
-                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
-                  for="phone"
-                  >Phone Number</label
-                >
-                <input
-                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
-                  id="phone"
-                  name="telefone"
-                  placeholder="+44 (0) 20 7946 0000"
-                  type="tel"
-                />
-              </div>
-              <div class="relative">
-                <label
-                  class="block font-label-caps text-label-caps text-outline uppercase mb-2"
-                  for="password"
-                  >Password</label
-                >
-                <input
-                  class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
-                  id="password"
-                  name="password"
-                  placeholder="••••••••••••"
-                  type="password"
-                />
-              </div>
-            </div>
-            <div class="flex items-center space-x-3 pt-4">
-              <input
-                class="w-4 h-4 text-primary border-outline-variant focus:ring-secondary rounded-none"
-                id="newsletter"
-                type="checkbox"
-              />
-              <label
-                class="font-body-md text-body-md text-on-surface-variant"
-                for="newsletter"
-              >
-                Assine a newsletter exclusiva para receber catálogos de looks da
-                temporada e informações sobre visitas privadas.
-              </label>
-            </div>
-            <div class="pt-8 space-y-6">
-              <button
-                class="w-full bg-primary-container text-white py-5 font-label-caps text-label-caps uppercase tracking-widest hover:bg-primary transition-all duration-300"
-                type="submit"
-              >
-                Criar Conta
-              </button>
-              <div class="flex items-center justify-between">
-                <span class="h-px bg-outline-variant/30 flex-grow"></span>
-                <span
-                  class="px-4 font-label-caps text-[10px] text-outline uppercase"
-                  >Or</span
-                >
-                <span class="h-px bg-outline-variant/30 flex-grow"></span>
-              </div>
-              <button
-                class="w-full border border-outline/30 text-primary py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-3"
-                type="button"
-              >
-                <img
-                  src="https://developers.google.com/identity/images/g-logo.png"
-                  alt="Google"
-                  class="w-5 h-5"
-                />
-                Continue com Google
-              </button>
-              <button
-                class="w-full border border-outline/30 text-primary py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-3"
-                type="button"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-5 h-5"
-                >
-                  <path
-                    d="M16.365 1.43c0 1.14-.463 2.21-1.24 3.02-.81.84-2.14 1.48-3.28 1.39-.14-1.12.41-2.25 1.16-3.06.77-.84 2.09-1.45 3.36-1.35zm4.3 16.11c-.68 1.55-1.5 2.98-2.76 2.99-1.23.02-1.63-.79-3.05-.79-1.42 0-1.87.77-3.02.81-1.22.05-2.16-1.6-2.86-3.14-1.38-3.02-2.44-8.55 1.92-11.06 1.08-.63 2.3-.99 3.58-.99 1.4 0 2.62.9 3.42.9.8 0 2.3-1.11 3.88-.95.66.03 2.5.27 3.69 2.01-.1.06-2.2 1.28-2.18 3.82.02 3.03 2.66 4.03 2.69 4.05-.02.07-.42 1.44-1.33 2.35z"
-                  />
-                </svg>
-                Continue com Apple
-              </button>
-            </div>
-          <?php if (isset($sucesso)): ?>
-                <p class="text-green-500 text-center"><?php echo $sucesso; ?></p>
-                <?php endif; ?>
-                <?php if (isset($erro)): ?>
-                <p class="text-red-500 text-center"><?php echo $erro; ?></p>
-                <?php endif; ?>
-              </div>
-            </form>
-          <p
-            class="mt-12 text-center font-body-md text-on-surface-variant text-sm"
-          >
-            Já faz parte do mundo?
-            <a
-              class="text-secondary font-semibold hover:underline underline-offset-4"
-              href="login.html"
-              >Entrar</a
-            >
-          </p>
-        </div>
-      </div>
-    </main>
-    <!-- Footer -->
-    <footer
-      class="bg-[#FAF9F4] w-full py-24 px-8 md:px-16 border-t border-[#1B3022]/10"
-    >
-      <div
-        class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12"
-      >
-        <div class="col-span-1 md:col-span-1">
-          <div
-            class="text-2xl font-headline-lg tracking-[0.3em] text-[#1B3022] uppercase mb-8"
-          >
-            LUPIÈRE
-          </div>
-          <p class="font-body-md text-[#1B3022]/60 max-w-xs">
-            Elevando a alfaiataria clássica para o homem contemporâneo. Rigor,
-            tradição e personalidade.
-          </p>
-        </div>
-        <div class="flex flex-col gap-4">
-          <h4
-            class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
-          >
-            Explorar
-          </h4>
-          <a
-            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Inicio</a
-          >
-          <a
-            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Coleções</a
-          >
-          <a
-            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Acessórios</a
-          >
-        </div>
-        <div class="flex flex-col gap-4">
-          <h4
-            class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
-          >
-            Atendimento ao Cliente
-          </h4>
-          <a
-            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Envio &amp; Devoluções</a
-          >
-          <a
-            class="font-body-md text-[#1B3022]/60 hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Política de Privacidade</a
-          >
-        </div>
-        <div class="flex flex-col gap-4">
-          <h4
-            class="font-label-caps text-[12px] text-[#1B3022] uppercase tracking-widest mb-4"
-          >
-            Atelier
-          </h4>
-          <p class="font-body-md text-[#1B3022]/60">
-            Avenida da Liberdade, 110<br />
-            1250-146 Lisboa, Portugal
-          </p>
-          <div class="mt-4 flex gap-6">
-            <a
-              class="text-[#1B3022]/60 hover:text-[#1B3022]"
-              href="https://www.instagram.com/uselupiere/"
-              target="_blank"
-            >
-              <span class="material-symbols-outlined text-[20px]">
-                photo_camera
-              </span>
+            <a href="carrinho.php" class="icon-btn">
+                <span class="material-symbols-outlined">shopping_bag</span>
             </a>
-            <a
-              class="text-[#1B3022]/60 hover:text-[#1B3022]"
-              href="mailto:info@lupiere.com"
-              target="_blank"
-            >
-              <span class="material-symbols-outlined text-[20px]">mail</span></a
-            >
-          </div>
+
+            <a href="login.php" class="icon-btn">
+                <span class="material-symbols-outlined">person</span>
+            </a>
+
         </div>
-      </div>
-      <div
-        class="max-w-[1440px] mx-auto mt-24 pt-12 border-t border-[#1B3022]/5 flex flex-col md:flex-row justify-between items-center gap-6"
-      >
-        <div
-          class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase"
-        >
-          © 2026 LUPIÈRE TAILORS. ALL RIGHTS RESERVED.
+
+    </div>
+
+</header>
+
+<!-- MENU MOBILE -->
+<div
+    id="mobileMenu"
+    class="fixed top-0 left-[-100%] w-72 h-full bg-[#FAF9F4] z-50 transition-all duration-300 shadow-xl p-8 flex flex-col gap-8"
+>
+
+    <div class="flex justify-between items-center">
+
+        <span class="uppercase tracking-widest text-sm">
+            Menu
+        </span>
+
+        <button id="closeMenu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+
+    </div>
+
+    <a class="nav-link" href="index.php">Inicio</a>
+    <a class="nav-link" href="produtos.php">Coleções</a>
+    <a class="nav-link" href="acessorios.php">Acessórios</a>
+    <a class="nav-link" href="sobre.php">Nossa história</a>
+
+</div>
+
+<!-- MAIN -->
+<main class="flex-grow flex items-center justify-center py-40 px-6">
+
+    <div class="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+        <!-- IMAGEM -->
+        <div class="hidden md:block relative h-[700px]">
+
+            <div class="absolute inset-0 bg-primary-container/5 mix-blend-multiply z-10"></div>
+
+            <img
+                alt="Bespoke Tailoring"
+                class="w-full h-full object-cover"
+                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop"
+            />
+
+            <div class="absolute bottom-12 left-12 z-20 text-white">
+
+                <p class="uppercase tracking-[0.2em] mb-4 text-sm">
+                    Established 1984
+                </p>
+
+                <p class="headline text-3xl italic max-w-sm">
+                    "True elegance is the absence of noise."
+                </p>
+
+            </div>
+
         </div>
-        <div class="flex gap-8">
-          <a
-            class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Termos</a
-          >
-          <a
-            class="font-label-caps text-[10px] tracking-[0.2em] text-[#1B3022]/40 uppercase hover:text-[#1B3022] transition-colors"
-            href="#"
-            >Cookies</a
-          >
+
+        <!-- FORM -->
+        <div class="flex flex-col justify-center max-w-md mx-auto md:mx-0 w-full">
+
+            <header class="mb-12">
+
+                <h2 class="headline text-5xl text-primary mb-2">
+                    Junte-se ao Atelier
+                </h2>
+
+                <p class="text-lg text-on-surface-variant italic">
+                    Entre no mundo de Lupière.
+                </p>
+
+            </header>
+
+            <!-- ALERTAS -->
+            <?php if (isset($sucesso)): ?>
+
+                <div class="bg-green-100 text-green-700 p-4 rounded mb-6">
+                    <?php echo $sucesso; ?>
+                </div>
+
+            <?php endif; ?>
+
+            <?php if (isset($erro)): ?>
+
+                <div class="bg-red-100 text-red-700 p-4 rounded mb-6">
+                    <?php echo $erro; ?>
+                </div>
+
+            <?php endif; ?>
+
+            <!-- FORMULARIO -->
+            <form class="space-y-8" method="POST">
+
+                <div class="space-y-6">
+
+                    <!-- NOME -->
+                    <div>
+
+                        <label class="block uppercase text-xs tracking-widest text-outline mb-2">
+                            Nome Completo
+                        </label>
+
+                        <input
+                            class="w-full form-input-bespoke py-3"
+                            name="full_name"
+                            placeholder="Alexander Sterling"
+                            type="text"
+                            required
+                        />
+
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div>
+
+                        <label class="block uppercase text-xs tracking-widest text-outline mb-2">
+                            Email
+                        </label>
+
+                        <input
+                            class="w-full form-input-bespoke py-3"
+                            name="email"
+                            placeholder="email@exemplo.com"
+                            type="email"
+                            required
+                        />
+
+                    </div>
+
+                    <!-- TELEFONE -->
+                    <div>
+
+                        <label class="block uppercase text-xs tracking-widest text-outline mb-2">
+                            Telefone
+                        </label>
+
+                        <input
+                            class="w-full form-input-bespoke py-3"
+                            name="telefone"
+                            placeholder="(16) 99999-9999"
+                            type="tel"
+                            required
+                        />
+
+                    </div>
+
+                    <!-- SENHA -->
+                    <div>
+
+                        <label class="block uppercase text-xs tracking-widest text-outline mb-2">
+                            Senha
+                        </label>
+
+                        <input
+                            class="w-full form-input-bespoke py-3"
+                            name="password"
+                            placeholder="••••••••"
+                            type="password"
+                            required
+                        />
+
+                    </div>
+
+                </div>
+
+                <!-- CHECKBOX -->
+                <div class="flex items-start gap-3 pt-2">
+
+                    <input
+                        class="mt-1"
+                        id="newsletter"
+                        type="checkbox"
+                    />
+
+                    <label class="text-sm text-on-surface-variant" for="newsletter">
+                        Assine a newsletter exclusiva para receber novidades e catálogos.
+                    </label>
+
+                </div>
+
+                <!-- BOTÃO -->
+                <div class="pt-8 space-y-6">
+
+                    <button
+                        class="w-full bg-primary-container text-white py-5 uppercase tracking-widest hover:bg-primary transition-all duration-300"
+                        type="submit"
+                    >
+                        Criar Conta
+                    </button>
+
+                    <div class="flex items-center justify-between">
+
+                        <span class="h-px bg-outline-variant/30 flex-grow"></span>
+
+                        <span class="px-4 uppercase text-xs text-outline">
+                            Ou
+                        </span>
+
+                        <span class="h-px bg-outline-variant/30 flex-grow"></span>
+
+                    </div>
+
+                    <!-- GOOGLE -->
+                    <button
+                        class="w-full border border-outline/30 text-primary py-4 uppercase tracking-widest hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-3"
+                        type="button"
+                    >
+
+                        <img
+                            src="https://developers.google.com/identity/images/g-logo.png"
+                            alt="Google"
+                            class="w-5 h-5"
+                        />
+
+                        Continue com Google
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <!-- LOGIN -->
+            <p class="mt-12 text-center text-sm text-on-surface-variant">
+
+                Já possui conta?
+
+                <a
+                    class="text-secondary font-semibold hover:underline"
+                    href="login.php"
+                >
+                    Entrar
+                </a>
+
+            </p>
+
         </div>
-      </div>
-    </footer>
-  </body>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-[#FAF9F4] w-full py-20 px-8 md:px-16 border-t border-[#1B3022]/10">
+
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+
+        <div>
+
+            <div class="text-2xl headline tracking-[0.3em] text-[#1B3022] uppercase mb-8">
+                LUPIÈRE
+            </div>
+
+            <p class="text-[#1B3022]/60 max-w-xs">
+                Elegância clássica para o homem contemporâneo.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4 class="uppercase tracking-widest mb-4 text-sm">
+                Explorar
+            </h4>
+
+            <div class="flex flex-col gap-3">
+
+                <a href="index.php">Inicio</a>
+
+                <a href="produtos.php">Coleções</a>
+
+                <a href="acessorios.php">Acessórios</a>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <h4 class="uppercase tracking-widest mb-4 text-sm">
+                Atendimento
+            </h4>
+
+            <div class="flex flex-col gap-3">
+
+                <a href="#">Envio & Devoluções</a>
+
+                <a href="#">Política de Privacidade</a>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <h4 class="uppercase tracking-widest mb-4 text-sm">
+                Atelier
+            </h4>
+
+            <p class="text-[#1B3022]/60">
+                Avenida da Liberdade, 110<br>
+                Lisboa, Portugal
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- SCRIPT MENU MOBILE -->
+<script>
+
+    const menuBtn = document.getElementById("menuBtn");
+    const closeMenu = document.getElementById("closeMenu");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.style.left = "0";
+    });
+
+    closeMenu.addEventListener("click", () => {
+        mobileMenu.style.left = "-100%";
+    });
+
+</script>
+
+</body>
 </html>

@@ -5,6 +5,7 @@ proteger_pagina_admin();
 
 $titulo_pagina = 'Gerenciar Pedidos';
 require_once '../includes/head.php';
+global $pdo;
 
 // Processar ações (atualizar status do pedido)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,7 +63,7 @@ $stmt_count->execute($params);
 $total_pedidos = $stmt_count->fetch()['total'];
 
 // Buscar pedidos
-$stmt = $pdo->prepare("SELECT p.*, u.nome as usuario_nome, u.email as usuario_email FROM pedidos p LEFT JOIN usuarios u ON p.usuario_id = u.id $where_clause ORDER BY p.data_pedido DESC LIMIT ? OFFSET OFFSET");
+$stmt = $pdo->prepare("SELECT p.*, u.nome as usuario_nome, u.email as usuario_email FROM pedidos p LEFT JOIN usuarios u ON p.usuario_id = u.id $where_clause ORDER BY p.data_pedido DESC LIMIT ? OFFSET ?");
 $params_paginacao = array_merge($params, [$limite, $offset]);
 $stmt->execute($params_paginacao);
 $pedidos = $stmt->fetchAll();
