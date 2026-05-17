@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+require_once 'funcoes.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $email = $_POST["email"];
+  $senha = $_POST["password"];
+
+  $usuario = obter_usuario_por_email($email);
+
+  if ($usuario && password_verify($senha, $usuario["senha"])) {
+    $_SESSION["usuario_id"] = $usuario["id"];
+    header("Location: index.php");
+    exit();
+  } else {
+    $erro = "Email ou senha inválidos";
+  }
+}
+?>
 <!doctype html>
 
 <html class="light" lang="en">
@@ -231,7 +251,7 @@
         <div
           class="bg-surface-container-lowest p-10 md:p-12 border border-outline-variant/30 shadow-sm"
         >
-          <form class="space-y-8">
+          <form class="space-y-8" method="post">
             <!-- Email Field -->
             <div class="space-y-2">
               <label
@@ -242,6 +262,8 @@
                 class="w-full bg-transparent border-b border-outline-variant py-3 focus:outline-none focus:border-secondary transition-colors font-body-md placeholder:text-outline-variant/50"
                 placeholder="email@example.com"
                 type="email"
+                name="email"
+                required
               />
             </div>
             <!-- Password Field -->
@@ -261,6 +283,8 @@
                 class="w-full bg-transparent border-b border-outline-variant py-3 focus:outline-none focus:border-secondary transition-colors font-body-md placeholder:text-outline-variant/50"
                 placeholder="••••••••"
                 type="password"
+                name="password"
+                required
               />
             </div>
             <!-- Sign In Button -->
@@ -271,7 +295,9 @@
               SIGN IN
             </button>
           </form>
-          <div class="relative my-10 text-center">
+          <?php if (isset($erro)): ?>
+        <p class="text-red-500"><?php echo $erro; ?></p>
+        <?php endif; ?>
             <div class="absolute inset-0 flex items-center">
               <span class="w-full border-t border-outline-variant/30"></span>
             </div>

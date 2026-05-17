@@ -1,3 +1,30 @@
+<?php
+session_start();
+require_once 'funcoes.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $nome = $_POST["full_name"];
+  $email = $_POST["email"];
+  $telefone = $_POST["phone"];
+  $senha = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+  // Verifica se o email já existe
+  $usuario_existente = obter_usuario_por_email($email);
+  if ($usuario_existente) {
+    $erro = "Este email já está cadastrado.";
+  } else {
+    // Insere o novo usuário no banco de dados
+    $conn = conectar_db();
+    $sql = "INSERT INTO usuarios (nome, email, telefone, senha) VALUES ('$nome', '$email', '$telefone', '$senha')";
+    if ($conn->query($sql) === TRUE) {
+      $sucesso = "Conta criada com sucesso! Você já pode fazer login.";
+    } else {
+      $erro = "Erro ao criar conta: " . $conn->error;
+    }
+    $conn->close();
+  }
+}
+?>
 <!doctype html>
 
 <html class="light" lang="en">
@@ -247,7 +274,7 @@
               Entre no mundo de Lupière.
             </p>
           </header>
-          <form class="space-y-8">
+          <form class="space-y-8" method="post">
             <div class="space-y-6">
               <div class="relative">
                 <label
@@ -286,7 +313,7 @@
                 <input
                   class="w-full form-input-bespoke py-3 text-body-md font-body-md text-primary"
                   id="phone"
-                  name="phone"
+                  name="telefone"
                   placeholder="+44 (0) 20 7946 0000"
                   type="tel"
                 />
@@ -363,7 +390,14 @@
                 Continue com Apple
               </button>
             </div>
-          </form>
+          <?php if (isset($sucesso)): ?>
+                <p class="text-green-500 text-center"><?php echo $sucesso; ?></p>
+                <?php endif; ?>
+                <?php if (isset($erro)): ?>
+                <p class="text-red-500 text-center"><?php echo $erro; ?></p>
+                <?php endif; ?>
+              </div>
+            </form>
           <p
             class="mt-12 text-center font-body-md text-on-surface-variant text-sm"
           >
