@@ -71,4 +71,17 @@ function obter_categorias() {
   return $categorias;
 }
 
+function obter_usuario_por_id($id) {
+  $conn = conectar_db();
+  $sql = "SELECT * FROM usuarios WHERE id = $id";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $usuario = $result->fetch_assoc();
+  } else {
+    $usuario = null;
+  }
+  $conn->close();
+  return $usuario;
+}
+
 ?>
